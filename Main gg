@@ -17,3 +17,7 @@ def space():
             print('Имя: %s, космический аппарат: %s' % (i.get('name'), i.get('craft')))
         print('Человек на данный момент в космосе: %s' % (space_json.get('number')))
         
+def try_requests():
+        res = requests.get("http://open-notify.org")
+        print(res)
+        

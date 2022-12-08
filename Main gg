@@ -3,7 +3,7 @@ import json
 
 city_name = input('Введите название города: ')
 response = requests.get('https://api.openweathermap.org/data/2.5/weather',
-                        params={'q': city_name, 'appid': b70c12952690fc12ac56a660d58b8ec2}, timeout=5).json()
+                        params={'q': city_name, 'appid': 'b70c12952690fc12ac56a660d58b8ec2'}, timeout=5).json()
 
 result = requests.get(website)
 data = result.json()

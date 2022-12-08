@@ -9,24 +9,11 @@ print(f'Температура: {round(response["main"]["temp"])}')
 print(f'Влажность: {response["main"]["humidity"]} %')
 print(f'Давление: {response["main"]["pressure"]} мм.рт.ст.')
 
-#hh.ru
-
-def getPage(page = 0):
-
-    params = {'text': 'NAME:Аналитик', 'area': 2, 'page': page, 'per_page': 100}
-
-    req = requests.get('https://api.hh.ru/vacancies', params)
-    data = req.json()
-
-
-for page in range(0, 20):
-
-    jsObj = json.loads(getPage(page))
-
-    nextFileName = './docs/pagination/{}.json'.format(len(os.listdir('./docs/pagination')))
-
-    f = open(nextFileName, mode='w', encoding='utf8')
-    f.write(json.dumps(jsObj, ensure_ascii=False))
-    f.close()
-
-print('Старницы собраны')
+# open-notify.org
+def space():
+        space = 'http://api.open-notify.org/astros.json'
+        space_json = requests.get(space).json()
+        for i in space_json.get('people'):
+            print('Имя: %s, космический аппарат: %s' % (i.get('name'), i.get('craft')))
+        print('Человек на данный момент в космосе: %s' % (space_json.get('number')))
+        

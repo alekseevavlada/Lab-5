@@ -1,16 +1,12 @@
 import requests
 import json
 
-website = ('http://api.openweathermap.org/data/2.5/weather?'
-         'lat=51.30&'
-         'lon=0.07&'
-         'weather_key=7cdcfaa69a322e2c77fdf3043de45290&'
-         'units=metric&'
-         'lang=ru')
+city_name = input('Введите название города: ')
+response = requests.get('https://api.openweathermap.org/data/2.5/weather',
+                        params={'q': city_name, 'appid': b70c12952690fc12ac56a660d58b8ec2}, timeout=5).json()
 
 result = requests.get(website)
 data = result.json()
-print("Лондон: ")
 print("Текущая погода:", data['weather'][0]['description'])
 print("Температура:", data['main']['temp'])
 print("Давление:", data['main']['pressure'])
@@ -18,10 +14,22 @@ print("Влажность:", data['main']['humidity'], "%")
 
 #hh.ru
 
-def vacancies():
-    request = 'https://api.hh.ru/vacancies'
-    vac_request = requests.get(request)
-    vac_json = vac_request.json()
-    for i in vac_json.get("vacancies"):
-        print("Вакансии: %s" % (i.get("number")))
+def getPage(page = 0):
 
+    params = {'text': 'NAME:Аналитик', 'area': 2, 'page': page, 'per_page': 100}
+
+    req = requests.get('https://api.hh.ru/vacancies', params)
+    data = req.json()
+
+
+for page in range(0, 20):
+
+    jsObj = json.loads(getPage(page))
+
+    nextFileName = './docs/pagination/{}.json'.format(len(os.listdir('./docs/pagination')))
+
+    f = open(nextFileName, mode='w', encoding='utf8')
+    f.write(json.dumps(jsObj, ensure_ascii=False))
+    f.close()
+
+print('Старницы собраны')

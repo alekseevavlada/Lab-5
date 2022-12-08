@@ -1,0 +1,27 @@
+import requests
+import json
+
+website = ('http://api.openweathermap.org/data/2.5/weather?'
+         'lat=51.30&'
+         'lon=0.07&'
+         'weather_key=7cdcfaa69a322e2c77fdf3043de45290&'
+         'units=metric&'
+         'lang=ru')
+
+result = requests.get(website)
+data = result.json()
+print("Лондон: ")
+print("Текущая погода:", data['weather'][0]['description'])
+print("Температура:", data['main']['temp'])
+print("Давление:", data['main']['pressure'])
+print("Влажность:", data['main']['humidity'], "%")
+
+#hh.ru
+
+def vacancies():
+    request = 'https://api.hh.ru/vacancies'
+    vac_request = requests.get(request)
+    vac_json = vac_request.json()
+    for i in vac_json.get("vacancies"):
+        print("Вакансии: %s" % (i.get("number")))
+

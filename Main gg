@@ -1,8 +1,8 @@
 import requests
 import json
 
-city_name = input('Введите название города: ')
-response = requests.get('https://api.openweathermap.org/data/2.5/weather',
+city_name = input("Введите название города: ")
+response = requests.get("https://api.openweathermap.org/data/2.5/weather",
                         params={'q': city_name, 'appid': 'b70c12952690fc12ac56a660d58b8ec2'}, timeout=5).json()
 
 print(f'Температура: {round(response["main"]["temp"])}')
@@ -20,11 +20,11 @@ def IntSpaceStation():
         print("Долгота: %s" % (lon))
         
 def space():
-        space = 'http://api.open-notify.org/astros.json'
+        space = "http://api.open-notify.org/astros.json"
         space_json = requests.get(space).json()
-        for i in space_json.get('people'):
-            print('Имя: %s, космический аппарат: %s' % (i.get('name'), i.get('craft')))
-        print('Человек на данный момент в космосе: %s' % (space_json.get('number')))
+        for i in space_json.get("people"):
+            print("Имя: %s, космический аппарат: %s" % (i.get("name"), i.get("craft")))
+        print("Человек на данный момент в космосе: %s" % (space_json.get("number")))
         
 def try_requests():
         res = requests.get("http://open-notify.org")
